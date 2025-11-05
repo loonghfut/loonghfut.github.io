@@ -28,6 +28,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Sync articles from content to _articles
+        run: |
+          echo "Syncing articles from content/posts to _articles..."
+          mkdir -p _articles
+          rsync -av --delete content/posts/ _articles/
+          echo "Articles synced successfully!"
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Build with Jekyll
