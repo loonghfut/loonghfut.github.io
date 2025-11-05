@@ -29,10 +29,14 @@ layout: default
   </div>
   
   <div class="post-content">
-    <aside class="toc-wrapper">
-      {% include toc-liquid.html %}
+    <aside class="outline-panel" aria-label="文章大纲">
+      <div class="outline-header">
+        <strong>大纲</strong>
+        <button class="outline-toggle" type="button" aria-expanded="true" aria-controls="outline-content">收起</button>
+      </div>
+      <nav id="outline-content" class="outline-content" aria-label="段落导航"></nav>
     </aside>
-    
+
     <div class="article-body">
       {{ content }}
     </div>
@@ -78,6 +82,6 @@ layout: default
     }
   })();
 
-  // TOC logic moved to external file for maintainability
+  // Outline logic is implemented in /assets/js/outline.js
 </script>
-<!-- TOC is generated server-side via include -->
+<!-- Outline is generated client-side -->
