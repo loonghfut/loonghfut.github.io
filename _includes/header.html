@@ -1,10 +1,26 @@
-<header>
+<header class="site-header">
   <div class="header-content">
-    <div>
-      <h1><a href="{{ '/' | relative_url }}">{{ site.title | default: "Loonghfut's siyuan share" }}</a></h1>
+    <div class="brand">
+      <h1 class="site-title"><a href="{{ '/' | relative_url }}">{{ site.title | default: "Loonghfut's siyuan share" }}</a></h1>
+      <p class="site-sub">{{ site.description | default: "Map of Content Navigation" }}</p>
     </div>
-    <button class="theme-toggle" aria-label="Toggle theme">
-      <span>🌙</span><span>深色模式</span>
-    </button>
+
+    <nav class="site-nav" aria-label="主导航">
+      <ul>
+        <li><a href="{{ '/' | relative_url }}">首页</a></li>
+        <li><a href="{{ '/posts/' | relative_url }}">文章</a></li>
+        <li><a href="{{ '/content/' | relative_url }}">内容</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <button class="theme-toggle" aria-label="Toggle theme">
+        <span class="theme-icon">🌙</span>
+        <span class="theme-label">深色模式</span>
+      </button>
+      <button class="hamburger" aria-label="展开菜单" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
 </header>

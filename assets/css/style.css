@@ -1,609 +1,114 @@
-/* Base styles and CSS variables for theming */
-:root {
-  --bg-color: #ffffff;
-  --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --text-color: #333333;
-  --text-muted: #666666;
-  --link-color: #667eea;
-  --link-hover-color: #5568d3;
-  --border-color: #e0e0e0;
-  --card-bg: #ffffff;
-  --card-hover: #f8f9fa;
-  --shadow: rgba(102, 126, 234, 0.1);
-  --shadow-hover: rgba(102, 126, 234, 0.2);
-  --transition-speed: 0.3s;
-  --header-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --accent-color: #667eea;
+/* Modern minimal theme: variables, typography, layout */
+:root{
+  --bg: #f7fafc; /* page background */
+  --surface: #ffffff; /* cards */
+  --muted: #64748b; /* secondary text */
+  --text: #0f1724; /* primary text */
+  --accent: #0ea5a4; /* teal */
+  --accent-2: #06b6d4;
+  --border: #e6eef2;
+  --glass: rgba(255,255,255,0.6);
+  --shadow-sm: 0 6px 18px rgba(15,23,36,0.06);
+  --shadow-md: 0 12px 30px rgba(15,23,36,0.08);
+  --radius: 12px;
+  --gap: 20px;
+  --transition: 220ms cubic-bezier(.2,.9,.2,1);
+  --header-bg: linear-gradient(90deg, rgba(14,165,164,0.95), rgba(6,182,212,0.95));
+}
+
+[data-theme="dark"]{
+  --bg: #071023;
+  --surface: #0f1724;
+  --muted: #94a3b8;
+  --text: #f1f5f9;
+  --accent: #06b6d4;
+  --accent-2: #0ea5a4;
+  --border: rgba(255,255,255,0.06);
+  --glass: rgba(255,255,255,0.04);
+  --shadow-sm: 0 6px 18px rgba(2,6,23,0.6);
+  --shadow-md: 0 12px 30px rgba(2,6,23,0.65);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: 'Noto Sans SC', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  color:var(--text);
+  background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.6;
+}
+
+/* Page container */
+main{max-width:1100px;margin:28px auto;padding:16px}
+
+/* Header */
+.site-header{background:transparent;padding:22px 0}
+.site-header .header-content{max-width:1100px;margin:0 auto;padding:0 16px;display:flex;align-items:center;gap:16px;justify-content:space-between}
+.brand .site-title{font-size:1.25rem;margin:0;font-weight:700}
+.brand .site-title a{color:var(--text);text-decoration:none}
+.brand .site-sub{margin:2px 0 0;color:var(--muted);font-size:0.86rem}
+
+.site-nav ul{display:flex;gap:12px;list-style:none;margin:0;padding:0}
+.site-nav a{color:var(--muted);text-decoration:none;padding:8px 10px;border-radius:8px;font-weight:500}
+.site-nav a:hover{color:var(--text);background:var(--glass);transition:background var(--transition)}
+
+.header-actions{display:flex;align-items:center;gap:10px}
+.theme-toggle{background:transparent;border:1px solid var(--border);padding:8px 12px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;color:var(--text);transition:transform var(--transition),background var(--transition)}
+.theme-toggle:hover{transform:translateY(-2px)}
+.hamburger{width:40px;height:40px;border-radius:10px;border:1px solid var(--border);background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.hamburger span{display:block;width:16px;height:2px;background:var(--text);margin:2px 0;border-radius:2px}
+
+/* Hero */
+.hero{background:var(--surface);padding:36px;border-radius:14px;box-shadow:var(--shadow-sm);text-align:center}
+.hero h2{font-size:1.6rem;margin:0 0 8px}
+.hero p{color:var(--muted);margin:0}
+
+/* Grid of cards */
+.moc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:var(--gap);margin-top:20px}
+.moc-card{background:var(--surface);border-radius:var(--radius);padding:20px;border:1px solid var(--border);box-shadow:var(--shadow-sm);transition:transform var(--transition),box-shadow var(--transition)}
+.moc-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-md)}
+.moc-card h3{margin:0 0 8px;font-size:1.05rem;color:var(--accent)}
+.moc-card p{color:var(--muted);margin:0 0 12px}
+.moc-card .date{font-size:0.85rem;color:var(--muted)}
+
+/* Content pages */
+.content{margin-top:22px}
+.article-header{margin-bottom:18px}
+.article-header h2{font-size:1.8rem;margin:0}
+.article-meta{color:var(--muted);font-size:0.95rem;margin-top:8px}
+
+.article-body img{max-width:100%;border-radius:8px}
+.content pre{background:var(--surface);padding:14px;border-radius:8px;border:1px solid var(--border);overflow:auto}
+.content code{background:rgba(0,0,0,0.04);padding:2px 6px;border-radius:6px;font-family:monospace}
+
+/* Two-column layout for posts (desktop) */
+.post-content{display:grid;grid-template-columns:2fr 320px;gap:28px;align-items:start}
+.toc{background:var(--surface);border:1px solid var(--border);padding:14px;border-radius:10px;position:sticky;top:20px}
+.toc h3{margin:0 0 8px;color:var(--accent)}
+.toc a{display:block;padding:6px 8px;border-radius:6px;color:var(--muted);text-decoration:none}
+.toc a:hover{background:var(--glass);color:var(--text)}
+
+/* Back link style */
+.back-link{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;background:var(--surface);border:1px solid var(--border);text-decoration:none;color:var(--text)}
+
+/* Footer small notes handled in layout */
+
+/* Responsive adjustments */
+@media (max-width:900px){
+  .post-content{grid-template-columns:1fr}
+  .site-nav{display:none}
+  .brand .site-sub{display:none}
 }
 
-[data-theme="dark"] {
-  --bg-color: #0f0f1e;
-  --bg-gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-  --text-color: #e0e0e0;
-  --text-muted: #999999;
-  --link-color: #8b9cff;
-  --link-hover-color: #a5b4ff;
-  --border-color: #2a2a3e;
-  --card-bg: #1a1a2e;
-  --card-hover: #252540;
-  --shadow: rgba(0, 0, 0, 0.3);
-  --shadow-hover: rgba(0, 0, 0, 0.5);
-  --header-bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-  --accent-color: #8b9cff;
+@media (max-width:480px){
+  main{padding:10px}
+  .hero{padding:20px}
+  .site-header .header-content{padding:0 12px}
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  line-height: 1.6;
-  color: var(--text-color);
-  background-color: var(--bg-color);
-  transition: background-color var(--transition-speed), color var(--transition-speed);
-  padding: 0;
-  margin: 0;
-  min-height: 100vh;
-}
-
-header {
-  background: var(--header-bg);
-  color: white;
-  padding: 2rem 0;
-  margin-bottom: 0;
-  box-shadow: 0 4px 6px var(--shadow);
-}
-
-.header-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-header h1 {
-  margin: 0;
-  font-size: 2rem;
-  font-weight: 700;
-}
-
-header h1 a {
-  color: white;
-  text-decoration: none;
-  transition: opacity var(--transition-speed);
-}
-
-header h1 a:hover {
-  opacity: 0.8;
-  text-decoration: none;
-}
-
-h1 {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
-  font-weight: 700;
-}
-
-h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  margin-top: 40px;
-  font-weight: 600;
-  color: var(--accent-color);
-}
-
-h3 {
-  font-size: 1.5rem;
-  margin-bottom: 15px;
-  margin-top: 20px;
-  font-weight: 600;
-}
-
-a {
-  color: var(--link-color);
-  text-decoration: none;
-  transition: color var(--transition-speed);
-}
-
-a:hover {
-  color: var(--link-hover-color);
-  text-decoration: underline;
-}
-
-/* Theme toggle button */
-.theme-toggle {
-  background-color: rgba(255, 255, 255, 0.2);
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  color: white;
-  border-radius: 50px;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: all var(--transition-speed);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  backdrop-filter: blur(10px);
-}
-
-.theme-toggle:hover {
-  background-color: rgba(255, 255, 255, 0.3);
-  transform: scale(1.05);
-}
-
-.theme-toggle:active {
-  transform: scale(0.95);
-}
-
-/* Main content area */
-main {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 20px;
-}
-
-/* Hero section */
-.hero {
-  text-align: center;
-  padding: 60px 20px;
-  background: var(--bg-gradient);
-  color: white;
-  margin: -40px -20px 40px -20px;
-  border-radius: 0 0 30px 30px;
-  box-shadow: 0 10px 30px var(--shadow);
-}
-
-.hero h2 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: white;
-  font-weight: 700;
-}
-
-.hero p {
-  font-size: 1.2rem;
-  opacity: 0.9;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-/* MOC Navigation Grid */
-.moc-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 25px;
-  margin: 30px 0;
-}
-
-.moc-card {
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  padding: 25px;
-  transition: all var(--transition-speed);
-  box-shadow: 0 4px 10px var(--shadow);
-  position: relative;
-  overflow: hidden;
-}
-
-.moc-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background: var(--bg-gradient);
-  transform: scaleX(0);
-  transition: transform var(--transition-speed);
-}
-
-.moc-card:hover::before {
-  transform: scaleX(1);
-}
-
-.moc-card:hover {
-  background-color: var(--card-hover);
-  transform: translateY(-8px);
-  box-shadow: 0 8px 20px var(--shadow-hover);
-}
-
-.moc-card h3 {
-  margin-top: 0;
-  margin-bottom: 12px;
-  color: var(--accent-color);
-  font-weight: 600;
-}
-
-.moc-card p {
-  margin-bottom: 10px;
-  opacity: 0.8;
-  line-height: 1.6;
-}
-
-.moc-card .date {
-  font-size: 0.85rem;
-  opacity: 0.6;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.moc-card .date::before {
-  content: '📅';
-}
-
-/* Content container for pages */
-.content {
-  margin-top: 30px;
-}
-
-/* Article specific styles */
-article.post-content {
-  display: grid;
-  /* 主内容在左，目录在右，目录占四分之一宽度（3:1） */
-  grid-template-columns: 3fr 1fr;
-  gap: 40px;
-  align-items: start;
-}
-
-/* 强制 grid 项目位置：确保即使 DOM 中 TOC 在前也能定位到右侧 */
-.toc-wrapper {
-  grid-column: 2;
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.article-body {
-  grid-column: 1;
-}
-
-/* 当侧边目录折叠时，将右侧列缩小为窄条，避免留下大片空白 */
-.post-content.toc-collapsed {
-  /* 不改变 grid 布局，保持正文列宽固定（折叠只隐藏侧边内容，不影响正文排版） */
-  grid-template-columns: 3fr 1fr;
-}
-
-/* 折叠时隐藏 TOC 的可见内容，但保留右侧占位，避免正文宽度变化 */
-.post-content.toc-collapsed .toc {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition: opacity var(--transition-speed);
-}
-
-.post-content.toc-collapsed #toc-content {
-  display: none !important;
-}
-
-/* ensure toggle is visible and accessible when not collapsed */
-.toc-toggle {
-  position: relative;
-  z-index: 2;
-}
-
-/* Small screens: same single-column behavior */
-@media (max-width: 768px) {
-  .post-content {
-    grid-template-columns: 1fr;
-  }
-
-  .toc-wrapper {
-    position: static;
-    margin-bottom: 30px;
-    justify-content: flex-start;
-  }
-}
-
-/* Featured/Header image */
-.featured-image {
-  width: 100%;
-  height: 400px;
-  object-fit: cover;
-  border-radius: 12px;
-  margin-bottom: 30px;
-  box-shadow: 0 4px 10px var(--shadow);
-}
+/* Utility */
+.muted{color:var(--muted)}
 
-/* Notion-style header image */
-.notion-header-image {
-  width: calc(100% + 40px);
-  margin: -30px -20px 30px -20px;
-  height: 350px;
-  overflow: hidden;
-  position: relative;
-}
-
-.notion-header-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 0;
-  margin: 0;
-  box-shadow: none;
-}
-
-/* Article header */
-.article-header {
-  margin-bottom: 40px;
-  padding-bottom: 20px;
-  border-bottom: 2px solid var(--border-color);
-}
-
-.article-header h2 {
-  margin-top: 0;
-  margin-bottom: 15px;
-  font-size: 2.5rem;
-  color: var(--text-color);
-}
-
-.article-meta {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  font-size: 0.95rem;
-  color: var(--text-muted);
-}
-
-.article-meta-item {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-/* Table of Contents */
-.toc-wrapper {
-  position: sticky;
-  top: 20px;
-  height: fit-content;
-  /* ensure it stays in right column when sticky */
-  grid-column: 2;
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.toc {
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 4px 10px var(--shadow);
-}
-
-.toc-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-.toc h3 {
-  margin: 0;
-  font-size: 1.2rem;
-  color: var(--accent-color);
-}
-
-.toc-toggle {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 5px;
-  color: var(--accent-color);
-  font-size: 1rem;
-  transition: all var(--transition-speed);
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-}
-
-.toc-toggle:hover {
-  background-color: var(--card-hover);
-  transform: scale(1.1);
-}
-
-.toc-toggle:active {
-  transform: scale(0.95);
-}
-
-.toc-toggle-icon {
-  display: block;
-  line-height: 1;
-}
-
-#toc-content.collapsed {
-  display: none;
-}
-
-.toc ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.toc ul ul {
-  margin-left: 15px;
-  margin-top: 5px;
-}
-
-.toc li {
-  margin-bottom: 8px;
-}
-
-.toc a {
-  color: var(--text-color);
-  text-decoration: none;
-  transition: color var(--transition-speed);
-  display: block;
-  padding: 5px 10px;
-  border-radius: 6px;
-  font-size: 0.95rem;
-}
-
-.toc a:hover {
-  color: var(--accent-color);
-  background-color: var(--card-hover);
-  text-decoration: none;
-}
-
-/* Article content */
-.article-body {
-  min-width: 0;
-}
-
-.content img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin: 20px 0;
-  box-shadow: 0 2px 8px var(--shadow);
-}
-
-.content pre {
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  padding: 15px;
-  overflow-x: auto;
-}
-
-.content code {
-  background-color: var(--card-bg);
-  padding: 2px 6px;
-  border-radius: 3px;
-  font-family: 'Courier New', monospace;
-}
-
-.content pre code {
-  background-color: transparent;
-  padding: 0;
-}
-
-/* List styles */
-ul, ol {
-  margin-left: 20px;
-  margin-bottom: 15px;
-}
-
-li {
-  margin-bottom: 8px;
-}
-
-/* Back button */
-.back-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 30px;
-  padding: 10px 20px;
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  transition: all var(--transition-speed);
-  color: var(--text-color);
-  box-shadow: 0 2px 4px var(--shadow);
-}
-
-.back-link:hover {
-  background-color: var(--card-hover);
-  transform: translateX(-5px);
-  box-shadow: 0 4px 8px var(--shadow-hover);
-  text-decoration: none;
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-  body {
-    padding: 0;
-  }
-
-  main {
-    padding: 20px 15px;
-  }
-
-  .hero {
-    margin: -20px -15px 30px -15px;
-    padding: 40px 20px;
-  }
-
-  .hero h2 {
-    font-size: 1.8rem;
-  }
-
-  h1 {
-    font-size: 2rem;
-  }
-
-  h2 {
-    font-size: 1.5rem;
-  }
-
-  .moc-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .header-content {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 15px;
-  }
-
-  article.post-content {
-    grid-template-columns: 1fr;
-  }
-
-  .toc-wrapper {
-    position: static;
-    margin-bottom: 30px;
-  }
-
-  .featured-image {
-    height: 250px;
-  }
-
-  .notion-header-image {
-    width: calc(100% + 30px);
-    margin: -20px -15px 20px -15px;
-    height: 250px;
-  }
-}
-
-/* 固定的恢复目录按钮（当侧边栏被完全折叠时显示） */
-.toc-restore-btn {
-  position: fixed;
-  right: 16px;
-  bottom: 24px;
-  width: 44px;
-  height: 44px;
-  border-radius: 22px;
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
-  box-shadow: 0 6px 18px var(--shadow);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 9999;
-  transition: transform var(--transition-speed), opacity var(--transition-speed);
-  opacity: 0.98;
-}
-
-.toc-restore-btn:hover {
-  transform: translateY(-3px) scale(1.03);
-}
-
-/* 在移动设备上不显示该固定按钮（移动端有单列 TOC） */
-@media (max-width: 768px) {
-  .toc-restore-btn {
-    display: none;
-  }
-}
