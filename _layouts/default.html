@@ -10,9 +10,12 @@
     // Apply theme immediately to prevent flash
     (function() {
       const savedTheme = localStorage.getItem('theme');
-      if (savedTheme === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'dark');
-      } else if (!savedTheme && window.matchMedia) {
+      if (savedTheme) {
+        if (savedTheme === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+        // Light theme doesn't need data-theme attribute (already default)
+      } else if (window.matchMedia) {
         const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
         if (darkModeQuery && darkModeQuery.matches) {
           document.documentElement.setAttribute('data-theme', 'dark');
