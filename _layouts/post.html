@@ -153,23 +153,27 @@ layout: default
     // TOC collapse/expand functionality
     const tocToggle = document.querySelector('.toc-toggle');
     const tocIcon = document.querySelector('.toc-toggle-icon');
-    
+    const postContentEl = document.querySelector('.post-content');
+
     // Load saved state from localStorage
     const tocCollapsed = localStorage.getItem('toc-collapsed') === 'true';
     if (tocCollapsed) {
       tocContent.classList.add('collapsed');
+      if (postContentEl) postContentEl.classList.add('toc-collapsed');
       tocIcon.textContent = '▶';
     }
-    
+
     tocToggle.addEventListener('click', () => {
       const isCollapsed = tocContent.classList.contains('collapsed');
-      
+
       if (isCollapsed) {
         tocContent.classList.remove('collapsed');
+        if (postContentEl) postContentEl.classList.remove('toc-collapsed');
         tocIcon.textContent = '▼';
         localStorage.setItem('toc-collapsed', 'false');
       } else {
         tocContent.classList.add('collapsed');
+        if (postContentEl) postContentEl.classList.add('toc-collapsed');
         tocIcon.textContent = '▶';
         localStorage.setItem('toc-collapsed', 'true');
       }

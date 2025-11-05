@@ -246,9 +246,44 @@ main {
 /* Article specific styles */
 article.post-content {
   display: grid;
-  grid-template-columns: 250px 1fr;
+  /* 主内容在左，目录在右（不需要修改 DOM 顺序，使用 grid 定位） */
+  grid-template-columns: 1fr 250px;
   gap: 40px;
   align-items: start;
+}
+
+/* 强制 grid 项目位置：确保即使 DOM 中 TOC 在前也能定位到右侧 */
+.toc-wrapper {
+  grid-column: 2;
+}
+
+.article-body {
+  grid-column: 1;
+}
+
+/* 当侧边目录折叠时，将右侧列缩小为窄条，避免留下大片空白 */
+.post-content.toc-collapsed {
+  grid-template-columns: 1fr 48px;
+}
+
+.post-content.toc-collapsed .toc {
+  padding: 8px;
+  overflow: visible;
+}
+
+.post-content.toc-collapsed .toc h3 {
+  display: none;
+}
+
+.post-content.toc-collapsed .toc ul,
+.post-content.toc-collapsed #toc-content {
+  display: none;
+}
+
+.post-content.toc-collapsed .toc-toggle {
+  width: 32px;
+  height: 32px;
+  padding: 4px;
 }
 
 /* Featured/Header image */
