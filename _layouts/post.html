@@ -88,17 +88,18 @@ layout: default
   // Generate table of contents
   (function() {
     const articleBody = document.querySelector('.article-body');
-    const tocContent = document.getElementById('toc-content');
-    const tocWrapper = document.querySelector('.toc-wrapper');
+  const tocContent = document.getElementById('toc-content');
+  const tocWrapper = document.querySelector('.toc-wrapper');
+  const postContentEl = document.querySelector('.post-content');
     
     if (!articleBody || !tocContent) return;
     
     const headings = articleBody.querySelectorAll('h1, h2, h3, h4, h5, h6');
     
     if (headings.length === 0) {
-      // If no headings, hide the TOC
-      tocWrapper.style.display = 'none';
-      document.querySelector('.post-content').style.gridTemplateColumns = '1fr';
+      // If no headings, hide the TOC and make article full-width
+      if (tocWrapper) tocWrapper.style.display = 'none';
+      if (postContentEl) postContentEl.classList.add('toc-collapsed');
       return;
     }
     
@@ -150,10 +151,9 @@ layout: default
       });
     });
     
-    // TOC collapse/expand functionality
-    const tocToggle = document.querySelector('.toc-toggle');
-    const tocIcon = document.querySelector('.toc-toggle-icon');
-    const postContentEl = document.querySelector('.post-content');
+  // TOC collapse/expand functionality
+  const tocToggle = document.querySelector('.toc-toggle');
+  const tocIcon = document.querySelector('.toc-toggle-icon');
 
     if (tocToggle) {
       // Load saved state from localStorage
